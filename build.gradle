@@ -1,0 +1,36 @@
+import org.gradle.internal.extensibility.DefaultExtraPropertiesExtension
+
+plugins {
+    id 'groovy'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+group 'fr.redstonneur1256'
+version '1.0'
+
+ext.versions = new DefaultExtraPropertiesExtension()
+ext.versions.redutilities = '1.5.1'
+ext.versions.groovy = '2.3.11'
+ext.versions.annotations = '12.0'
+
+compileJava.options.encoding = 'UTF-8'
+sourceSets.main.groovy.srcDirs = ['src/']
+sourceSets.main.resources.srcDirs = ['res/']
+sourceSets.test.groovy.srcDirs = []
+sourceSets.test.resources.srcDirs = []
+compileJava.sourceCompatibility = 1.8
+compileJava.targetCompatibility = 1.8
+
+shadowJar.archiveFileName = project.name + ".jar"
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile "com.github.Redstonneur1256:RedUtilities:${versions.redutilities}"
+    compile "org.codehaus.groovy:groovy-all:${versions.groovy}"
+    compile "com.intellij:annotations:${versions.annotations}"
+}
